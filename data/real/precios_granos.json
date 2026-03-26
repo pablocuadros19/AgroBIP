@@ -1,0 +1,11 @@
+{
+  "_descripcion": "Precios de referencia de granos — actualizar manualmente. Fuente: Matba Rofex / Bolsa de Comercio de Rosario.",
+  "fecha_actualizacion": "2026-03-26",
+  "tipo_cambio_usd_ars": 1200,
+  "granos": {
+    "soja": {"precio_tn_usd": 340, "precio_tn_ars": 408000},
+    "maiz": {"precio_tn_usd": 185, "precio_tn_ars": 222000},
+    "trigo": {"precio_tn_usd": 220, "precio_tn_ars": 264000},
+    "girasol": {"precio_tn_usd": 380, "precio_tn_ars": 456000}
+  }
+}

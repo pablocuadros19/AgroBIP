@@ -1,0 +1,110 @@
+{
+  "_descripcion": "Perfiles productivos mock por departamento con datos verosímiles de Pampa Húmeda.",
+  "perfiles": {
+    "06609": {
+      "nombre": "Pergamino",
+      "provincia": "Buenos Aires",
+      "tipo_zona": "agricola",
+      "cultivos": [
+        {"nombre": "Soja", "superficie_ha": 185000, "rendimiento_tn_ha": 3.2, "pct_superficie": 45},
+        {"nombre": "Maíz", "superficie_ha": 120000, "rendimiento_tn_ha": 9.5, "pct_superficie": 29},
+        {"nombre": "Trigo", "superficie_ha": 80000, "rendimiento_tn_ha": 4.1, "pct_superficie": 19},
+        {"nombre": "Girasol", "superficie_ha": 25000, "rendimiento_tn_ha": 2.0, "pct_superficie": 6}
+      ],
+      "superficie_total_ha": 410000,
+      "reserva_agua_pct": 28,
+      "reserva_agua_tendencia": "descendente",
+      "emergencia_activa": false,
+      "ficha": {
+        "que_pasa": "Déficit hídrico sostenido durante 3 semanas. Reserva de agua al 28%, por debajo del umbral de 40% para soja en etapa de llenado. Campaña gruesa en riesgo de merma de rendimiento.",
+        "por_que_importa": "Pergamino es uno de los departamentos agrícolas más importantes de la provincia. Una merma del 15-20% en rendimiento de soja impacta en la capacidad de pago de los productores y en la demanda de refinanciación.",
+        "que_producto": "Capital de trabajo para cubrir bache de caja. Refinanciación preventiva para productores con vencimientos en los próximos 60 días. Procampo Digital para insumos de campaña fina anticipada.",
+        "que_prioridad": "Acción esta semana. Contactar oficiales de la zona para identificar productores con mayor exposición."
+      }
+    },
+    "06560": {
+      "nombre": "9 de Julio",
+      "provincia": "Buenos Aires",
+      "tipo_zona": "agricola",
+      "cultivos": [
+        {"nombre": "Maíz", "superficie_ha": 95000, "rendimiento_tn_ha": 8.8, "pct_superficie": 38},
+        {"nombre": "Soja", "superficie_ha": 90000, "rendimiento_tn_ha": 2.9, "pct_superficie": 36},
+        {"nombre": "Girasol", "superficie_ha": 40000, "rendimiento_tn_ha": 2.1, "pct_superficie": 16},
+        {"nombre": "Trigo", "superficie_ha": 25000, "rendimiento_tn_ha": 3.8, "pct_superficie": 10}
+      ],
+      "superficie_total_ha": 250000,
+      "reserva_agua_pct": 32,
+      "reserva_agua_tendencia": "descendente",
+      "emergencia_activa": false,
+      "ficha": {
+        "que_pasa": "Maíz en etapa crítica de floración con NDVI cayendo 18% respecto al promedio. Reserva de agua al 32% y en descenso.",
+        "por_que_importa": "Zona con alta concentración de maíz. Caída de rendimiento impacta directamente en flujo de caja de productores y en recaudación de la sucursal.",
+        "que_producto": "Seguro agropecuario (si hay tiempo antes del cierre de póliza). Capital de trabajo para los que no tengan cobertura.",
+        "que_prioridad": "Acción esta semana. Priorizar productores sin seguro."
+      }
+    },
+    "14014": {
+      "nombre": "Marcos Juárez",
+      "provincia": "Córdoba",
+      "tipo_zona": "agricola",
+      "cultivos": [
+        {"nombre": "Soja", "superficie_ha": 210000, "rendimiento_tn_ha": 3.4, "pct_superficie": 48},
+        {"nombre": "Maíz", "superficie_ha": 150000, "rendimiento_tn_ha": 10.2, "pct_superficie": 34},
+        {"nombre": "Trigo", "superficie_ha": 60000, "rendimiento_tn_ha": 4.5, "pct_superficie": 14},
+        {"nombre": "Cebada", "superficie_ha": 18000, "rendimiento_tn_ha": 3.8, "pct_superficie": 4}
+      ],
+      "superficie_total_ha": 438000,
+      "reserva_agua_pct": 25,
+      "reserva_agua_tendencia": "critica",
+      "emergencia_activa": false,
+      "ficha": {
+        "que_pasa": "Expansión de maíz (+22% vs. campaña anterior) con estrés hídrico creciente. Zona en reconversión productiva con mayor intensificación.",
+        "por_que_importa": "Marcos Juárez es el corazón agrícola de Córdoba. La intensificación implica mayor inversión y mayor riesgo. Los productores necesitan más capital y más cobertura.",
+        "que_producto": "Préstamo Siembra para campaña fina. Procampo Digital para insumos. Evaluar líneas de inversión para productores que están intensificando.",
+        "que_prioridad": "Acción este mes. Zona con oportunidad ofensiva si el clima mejora."
+      }
+    },
+    "82063": {
+      "nombre": "General López",
+      "provincia": "Santa Fe",
+      "tipo_zona": "agricola",
+      "cultivos": [
+        {"nombre": "Soja", "superficie_ha": 280000, "rendimiento_tn_ha": 3.5, "pct_superficie": 50},
+        {"nombre": "Maíz", "superficie_ha": 180000, "rendimiento_tn_ha": 9.8, "pct_superficie": 32},
+        {"nombre": "Trigo", "superficie_ha": 70000, "rendimiento_tn_ha": 4.3, "pct_superficie": 12},
+        {"nombre": "Girasol", "superficie_ha": 30000, "rendimiento_tn_ha": 2.2, "pct_superficie": 5}
+      ],
+      "superficie_total_ha": 560000,
+      "reserva_agua_pct": 45,
+      "reserva_agua_tendencia": "estable",
+      "emergencia_activa": false,
+      "ficha": {
+        "que_pasa": "Mejora hídrica sostenida con perfil intensivo creciente. Zona con condiciones favorables para inversión productiva.",
+        "por_que_importa": "General López es el departamento con mayor superficie agrícola de Santa Fe. Condiciones favorables generan demanda de inversión en maquinaria y tecnología.",
+        "que_producto": "Procampo Digital USD para inversión en insumos premium. Líneas de maquinaria. Financiación de campaña anticipada.",
+        "que_prioridad": "Oportunidad ofensiva. Acción este mes para captar demanda de inversión."
+      }
+    },
+    "06189": {
+      "nombre": "Carlos Tejedor",
+      "provincia": "Buenos Aires",
+      "tipo_zona": "mixta",
+      "cultivos": [
+        {"nombre": "Girasol", "superficie_ha": 35000, "rendimiento_tn_ha": 1.8, "pct_superficie": 35},
+        {"nombre": "Soja", "superficie_ha": 30000, "rendimiento_tn_ha": 2.2, "pct_superficie": 30},
+        {"nombre": "Maíz", "superficie_ha": 20000, "rendimiento_tn_ha": 6.5, "pct_superficie": 20},
+        {"nombre": "Pastura", "superficie_ha": 15000, "rendimiento_tn_ha": 0, "pct_superficie": 15}
+      ],
+      "superficie_total_ha": 100000,
+      "reserva_agua_pct": 18,
+      "reserva_agua_tendencia": "critica",
+      "emergencia_activa": true,
+      "ficha": {
+        "que_pasa": "Emergencia agropecuaria declarada por sequía prolongada. Reserva de agua al 18%. Cultivos extensivos severamente afectados. Ganadería con estrés nutricional.",
+        "por_que_importa": "Zona con productores mixtos chicos-medianos. La emergencia pone en riesgo la continuidad de explotaciones. Necesidad urgente de alivio financiero.",
+        "que_producto": "Refinanciación emergencia con tasa bonificada (BADLAR 80% RO). Prórroga de vencimientos. Capital de trabajo de emergencia.",
+        "que_prioridad": "Acción inmediata. Prioridad máxima para la sucursal de la zona."
+      }
+    }
+  }
+}
