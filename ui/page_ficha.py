@@ -12,6 +12,85 @@ from services.zone_profile import get_perfil, sugerir_productos
 from services.alerts import get_alertas_por_zona
 
 
+_AGRO_PARQUET = "data/licitarg/agro-proveedores-estado.parquet"
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def _cargar_agro_parquet():
+    import os, pandas as pd
+    if not os.path.exists(_AGRO_PARQUET):
+        return None
+    return pd.read_parquet(_AGRO_PARQUET)
+
+
+def _render_empresas_zona(nombre_depto: str, provincia: str):
+    """Muestra empresas agro del sector en la zona seleccionada."""
+    import pandas as pd
+
+    df = _cargar_agro_parquet()
+    if df is None:
+        st.caption("Base de empresas no disponible.")
+        return
+
+    # Filtrar por localidad que contenga el nombre del departamento
+    termino = nombre_depto.upper().strip()
+    mask = (
+        df["dom_fiscal_localidad"].fillna("").str.upper().str.contains(termino, regex=False) |
+        df["dom_fiscal_provincia"].fillna("").str.upper().str.contains("BUENOS AIRES", regex=False)
+        & df["dom_fiscal_localidad"].fillna("").str.upper().str.contains(termino[:6], regex=False)
+    )
+    df_zona = df[mask].copy()
+
+    if df_zona.empty:
+        st.caption(f"Sin empresas registradas en {nombre_depto}.")
+        return
+
+    total = len(df_zona)
+    prov_estado = int(df_zona["es_proveedor_estado"].sum())
+
+    # KPIs rápidos
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        st.markdown(f'<div style="background:#f7f9fc;border:1px solid #e0e5ec;border-radius:10px;padding:0.8rem;text-align:center"><p style="font-size:1.5rem;font-weight:700;color:#00A651;margin:0">{total:,}</p><p style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:#555;margin:0">Empresas agro</p></div>', unsafe_allow_html=True)
+    with c2:
+        st.markdown(f'<div style="background:#f7f9fc;border:1px solid #e0e5ec;border-radius:10px;padding:0.8rem;text-align:center"><p style="font-size:1.5rem;font-weight:700;color:#00A651;margin:0">{prov_estado}</p><p style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:#555;margin:0">Proveedoras del estado</p></div>', unsafe_allow_html=True)
+    with c3:
+        tipos = df_zona["tipo_societario"].value_counts().head(1)
+        tipo_top = tipos.index[0] if len(tipos) > 0 else "—"
+        st.markdown(f'<div style="background:#f7f9fc;border:1px solid #e0e5ec;border-radius:10px;padding:0.8rem;text-align:center"><p style="font-size:1rem;font-weight:700;color:#00A651;margin:0">{tipo_top}</p><p style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:#555;margin:0">Forma jurídica frecuente</p></div>', unsafe_allow_html=True)
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # Tabla top empresas (priorizando proveedoras del estado)
+    df_tabla = df_zona.sort_values(
+        ["es_proveedor_estado", "monto_total_adj"], ascending=[False, False]
+    ).head(15)
+
+    for _, row in df_tabla.iterrows():
+        es_prov = bool(row.get("es_proveedor_estado", False))
+        monto = row.get("monto_total_adj")
+        monto_str = ""
+        if pd.notna(monto) and float(monto) > 0:
+            v = float(monto)
+            monto_str = f"${v/1_000_000:.1f}M adj." if v >= 1_000_000 else f"${v/1_000:.0f}K adj."
+
+        actividad = str(row.get("actividad_descripcion", "")).strip()[:50]
+        localidad = str(row.get("dom_fiscal_localidad", "")).strip()
+        cuit = str(row.get("cuit", "")).strip()
+        if len(cuit) == 11:
+            cuit_fmt = f"{cuit[:2]}-{cuit[2:10]}-{cuit[10]}"
+        else:
+            cuit_fmt = cuit
+
+        badge_estado = '<span style="background:#e8f5ee;color:#00A651;font-size:0.65rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:20px;margin-left:0.4rem">PROV. ESTADO</span>' if es_prov else ""
+        st.markdown(f"""
+        <div style="background:#f7f9fc;border:1px solid {'#c8e6d5' if es_prov else '#e0e5ec'};border-left:3px solid {'#00A651' if es_prov else '#e0e5ec'};border-radius:8px;padding:0.6rem 0.9rem;margin:0.25rem 0">
+            <span style="font-size:0.88rem;font-weight:700;color:#1a1a2e">{row.get('razon_social','').strip()}</span>{badge_estado}
+            <span style="float:right;font-size:0.82rem;font-weight:700;color:#00A651">{monto_str}</span>
+            <br><span style="font-size:0.75rem;color:#888">{cuit_fmt} · {localidad} · {actividad}</span>
+        </div>
+        """, unsafe_allow_html=True)
+
+
 def render_page_ficha():
     """Renderiza la ficha de zona con datos reales."""
 
@@ -189,6 +268,11 @@ def render_page_ficha():
         render_section_label(f"Alertas activas ({len(alertas_zona)})")
         for alerta in alertas_zona:
             render_alert_card(alerta)
+
+    # --- Empresas del sector (LICITARG) ---
+    st.markdown("<br>", unsafe_allow_html=True)
+    render_section_label("Empresas del sector en esta zona")
+    _render_empresas_zona(score_data.get("nombre", ""), score_data.get("provincia", ""))
 
     # --- Fuentes ---
     if perfil and perfil.get("fuentes"):
