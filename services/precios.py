@@ -7,7 +7,7 @@ from pathlib import Path
 PRECIOS_PATH = Path("data/real/precios_granos.json")
 
 
-@st.cache_data(ttl=3600)
+@st.cache_data(ttl=3600, show_spinner=False)
 def get_precios() -> dict:
     """Retorna dict de precios por grano."""
     if not PRECIOS_PATH.exists():

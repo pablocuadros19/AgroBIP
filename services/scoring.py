@@ -43,7 +43,7 @@ def _etiqueta_score(score, vbp_usd, variacion, tiene_emergencia):
     return "SIN PRIORIDAD"
 
 
-@st.cache_data(ttl=3600)
+@st.cache_data(ttl=3600, show_spinner=False)
 def _calcular_todos_los_scores() -> dict:
     """Calcula scores para todos los departamentos con datos reales."""
     resumen_agro = get_resumen_todos_deptos()

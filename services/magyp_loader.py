@@ -37,7 +37,7 @@ def _georef_id(departamento_id) -> str:
     return str(int(departamento_id)).zfill(5)
 
 
-@st.cache_data(ttl=3600)
+@st.cache_data(ttl=3600, show_spinner=False)
 def cargar_produccion(cultivo: str) -> pd.DataFrame:
     """Carga DataFrame de producción filtrado a provincias MVP."""
     path = _descargar_csv(cultivo)
@@ -48,7 +48,7 @@ def cargar_produccion(cultivo: str) -> pd.DataFrame:
     return df
 
 
-@st.cache_data(ttl=3600)
+@st.cache_data(ttl=3600, show_spinner=False)
 def cargar_todos_los_cultivos() -> pd.DataFrame:
     """Carga y concatena soja + maíz + trigo."""
     dfs = []
@@ -144,7 +144,7 @@ def get_variacion_superficie(georef_id: str) -> float:
     return ((actual - anterior) / anterior) * 100
 
 
-@st.cache_data(ttl=3600)
+@st.cache_data(ttl=3600, show_spinner=False)
 def get_resumen_todos_deptos() -> list:
     """Resumen de producción para todos los departamentos (última campaña)."""
     df = cargar_todos_los_cultivos()

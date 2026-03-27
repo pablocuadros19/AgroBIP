@@ -3,4 +3,4 @@
 __pycache__/
 *.pyc
 .venv/
-data/departamentos.geojson
+data/radar_agro.db

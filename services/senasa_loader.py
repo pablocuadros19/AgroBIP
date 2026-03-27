@@ -30,7 +30,7 @@ def _georef_id(departamento_id) -> str:
     return str(int(departamento_id)).zfill(5)
 
 
-@st.cache_data(ttl=3600)
+@st.cache_data(ttl=3600, show_spinner=False)
 def cargar_bovinos() -> pd.DataFrame:
     """Carga datos de bovinos filtrado a provincias MVP, último año disponible."""
     path = _descargar_bovinos()
@@ -76,7 +76,7 @@ def get_bovinos_depto(georef_id: str) -> dict:
     return resultado
 
 
-@st.cache_data(ttl=3600)
+@st.cache_data(ttl=3600, show_spinner=False)
 def get_resumen_bovinos() -> list:
     """Resumen ganadero de todos los departamentos (último año)."""
     df = cargar_bovinos()

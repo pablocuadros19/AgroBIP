@@ -47,6 +47,25 @@ MAP_COLORS = {
     "sin_datos": "#f0f0f0",
 }
 
+# Radar Agro — Clasificación comercial
+CLASIFICACION_COLORS = {
+    "oportunidad_limpia":    {"color": "#00A651", "bg": "#e8f5ee", "icon": "✅", "label": "Oportunidad limpia"},
+    "competencia_activa":    {"color": "#e65100", "bg": "#fff3e0", "icon": "⚔️", "label": "Competencia activa"},
+    "subatendido_potencial": {"color": "#1565c0", "bg": "#e3f2fd", "icon": "📈", "label": "Subatendido potencial"},
+    "corporativo_agregador": {"color": "#6a1b9a", "bg": "#f3e5f5", "icon": "🏢", "label": "Corporativo agregador"},
+    "revisar_manual":        {"color": "#999",    "bg": "#f5f5f5", "icon": "🔍", "label": "Revisar manual"},
+    "pendiente":             {"color": "#bbb",    "bg": "#f9f9f9", "icon": "⏳", "label": "Pendiente"},
+}
+
+# Radar Agro — Semáforo de acción
+SEMAFORO_COLORS = {
+    "contactar":  {"color": "#00A651", "bg": "#e8f5ee", "icon": "🟢", "label": "Contactar"},
+    "investigar": {"color": "#f9a825", "bg": "#fff8e1", "icon": "🟡", "label": "Investigar"},
+    "monitorear": {"color": "#1565c0", "bg": "#e3f2fd", "icon": "🔵", "label": "Monitorear"},
+    "descartar":  {"color": "#c62828", "bg": "#fce4ec", "icon": "🔴", "label": "Descartar"},
+    "pendiente":  {"color": "#bbb",    "bg": "#f9f9f9", "icon": "⏳", "label": "Pendiente"},
+}
+
 
 def get_score_band(score):
     """Devuelve la banda correspondiente a un score."""

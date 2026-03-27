@@ -214,3 +214,82 @@ def render_ficha_pregunta(pregunta, respuesta):
         <p>{respuesta}</p>
     </div>
     """, unsafe_allow_html=True)
+
+
+# --- Componentes Radar Agro ---
+
+def render_clasificacion_badge(clasificacion):
+    from ui.theme import CLASIFICACION_COLORS
+    info = CLASIFICACION_COLORS.get(clasificacion, CLASIFICACION_COLORS["pendiente"])
+    st.markdown(
+        f'<span style="background:{info["bg"]};color:{info["color"]};font-size:0.78rem;'
+        f'font-weight:600;padding:0.2rem 0.7rem;border-radius:20px;white-space:nowrap">'
+        f'{info["icon"]} {info["label"]}</span>',
+        unsafe_allow_html=True,
+    )
+
+
+def render_semaforo_badge(semaforo):
+    from ui.theme import SEMAFORO_COLORS
+    info = SEMAFORO_COLORS.get(semaforo, SEMAFORO_COLORS["pendiente"])
+    st.markdown(
+        f'<span style="background:{info["bg"]};color:{info["color"]};font-size:0.78rem;'
+        f'font-weight:600;padding:0.2rem 0.7rem;border-radius:20px;white-space:nowrap">'
+        f'{info["icon"]} {info["label"]}</span>',
+        unsafe_allow_html=True,
+    )
+
+
+def render_prospect_card(prospecto):
+    """Card de prospecto para Top 5 del día."""
+    from ui.theme import CLASIFICACION_COLORS, SEMAFORO_COLORS
+
+    clas_info = CLASIFICACION_COLORS.get(prospecto.get("clasificacion", ""), CLASIFICACION_COLORS["pendiente"])
+    sem_info = SEMAFORO_COLORS.get(prospecto.get("semaforo", ""), SEMAFORO_COLORS["pendiente"])
+    score = prospecto.get("score_total", 0)
+    cuit = prospecto.get("cuit", "")
+    if len(cuit) == 11:
+        cuit_fmt = f"{cuit[:2]}-{cuit[2:10]}-{cuit[10]}"
+    else:
+        cuit_fmt = cuit
+
+    cliente_bp = ' <span style="background:#e8f5ee;color:#00A651;font-size:0.6rem;font-weight:700;padding:0.1rem 0.4rem;border-radius:10px">BP</span>' if prospecto.get("es_cliente_bp") else ""
+
+    st.markdown(f"""
+    <div style="background:#f7f9fc;border:1px solid {clas_info['color']}30;border-left:4px solid {clas_info['color']};
+                border-radius:10px;padding:0.8rem 1rem;margin:0.3rem 0">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:0.9rem;font-weight:700;color:#1a1a2e">
+                {prospecto.get('razon_social', 'Sin nombre')}{cliente_bp}
+            </span>
+            <span style="font-size:1.3rem;font-weight:900;color:{clas_info['color']}">{score}</span>
+        </div>
+        <div style="font-size:0.75rem;color:#888;margin-top:0.2rem">
+            {cuit_fmt} · {prospecto.get('partido', '')}
+            <span style="margin-left:0.5rem;background:{clas_info['bg']};color:{clas_info['color']};
+                         font-size:0.65rem;font-weight:600;padding:0.1rem 0.5rem;border-radius:20px">
+                {clas_info['icon']} {clas_info['label']}</span>
+            <span style="margin-left:0.3rem;background:{sem_info['bg']};color:{sem_info['color']};
+                         font-size:0.65rem;font-weight:600;padding:0.1rem 0.5rem;border-radius:20px">
+                {sem_info['icon']} {sem_info['label']}</span>
+        </div>
+        <div style="font-size:0.78rem;color:#555;margin-top:0.3rem;font-style:italic">
+            "{prospecto.get('clasificacion_motivo', '')}"
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+
+def render_evolucion_badge(evolucion):
+    estilos = {
+        "mejorando": ("↑", "#00A651", "#e8f5ee"),
+        "estable": ("→", "#1565c0", "#e3f2fd"),
+        "empeorando": ("↓", "#c62828", "#fce4ec"),
+        "sin_historial": ("—", "#999", "#f5f5f5"),
+    }
+    flecha, color, bg = estilos.get(evolucion, ("—", "#999", "#f5f5f5"))
+    st.markdown(
+        f'<span style="background:{bg};color:{color};font-size:0.85rem;font-weight:700;'
+        f'padding:0.15rem 0.5rem;border-radius:8px">{flecha} {evolucion or "sin datos"}</span>',
+        unsafe_allow_html=True,
+    )

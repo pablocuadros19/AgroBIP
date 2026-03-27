@@ -29,6 +29,7 @@ with st.sidebar:
             "🔔 Alertas",
             "📊 Scoring",
             "📋 Ficha de Zona",
+            "🎯 Radar Agro",
         ],
         key="nav_pagina",
         label_visibility="collapsed",
@@ -47,7 +48,7 @@ with st.sidebar:
     st.text_input("Zona asignada", value="Pampa Húmeda", key="user_zona", disabled=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
-    st.caption("AgroBip v0.2 · Sprint 2 · Datos MAGyP + SENASA")
+    st.caption("AgroBip v0.3 · Sprint 3 · Radar Agro + BCRA")
 
 # --- Header ---
 render_header()
@@ -56,6 +57,10 @@ render_header()
 if "Dashboard" in pagina:
     from ui.page_dashboard import render_page_dashboard
     render_page_dashboard()
+
+elif "Radar Agro" in pagina:
+    from ui.page_radar_agro import render_page_radar_agro
+    render_page_radar_agro()
 
 elif "Radar" in pagina:
     from ui.page_radar import render_page_radar

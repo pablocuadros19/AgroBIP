@@ -4,7 +4,7 @@ import streamlit as st
 from services.magyp_loader import get_resumen_todos_deptos, get_variacion_superficie
 
 
-@st.cache_data(ttl=3600)
+@st.cache_data(ttl=3600, show_spinner=False)
 def _generar_alertas():
     """Genera alertas desde cambios en datos productivos reales (todas las provincias)."""
     resumen = get_resumen_todos_deptos()
